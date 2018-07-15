@@ -7,13 +7,14 @@ lib.exit = function( err ) {
   process.exit( err ? 1 : 0 );
 }
 
-lib.parseargs = function( argv ) {
+lib.parseargs = function( argv, opts ) {
   let bag = {};
   let arg;
   
   function cvt( v ) {
     if ( ! v ) return v;
-    if ( v.match( /^\d+$/ ) ) return Number( v );
+    if ( opts && opts.cvtToNumber === false ) {}
+    else if ( v.match( /^\d+$/ ) ) return Number( v );
     if ( v == 'true' ) return true;
     if ( v == 'false' ) return false;
     return v;
